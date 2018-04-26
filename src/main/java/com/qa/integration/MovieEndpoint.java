@@ -1,16 +1,19 @@
 package com.qa.integration;
 
+
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-import com.qa.business.service.IMovieService;
+import com.qa.business.service.MovieService;
 
 @Path("/movie")
 public class MovieEndpoint {
+	
 	@Inject
-	private IMovieService service;
+	private MovieService service;
 	
 	@GET
 	@Path("/json")
@@ -18,6 +21,11 @@ public class MovieEndpoint {
 	public String getAllMovies() {
 		return service.getAllMovies();
 	}
-	
+	@GET
+	@Path("/json/{id}")
+	@Produces(("application/json"))
+	public String getAMovie(@PathParam("id") Long id) {
+		return service.getAMovie(id);
 
+	}
 }
